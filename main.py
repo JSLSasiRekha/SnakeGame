@@ -41,8 +41,8 @@ class Snake:
         self.parent_screen = parent_screen
         self.image = Image.open("resources/circular_block.png").convert("RGBA")
         self.direction = 'down'
-        self.snake_speed = 0.4  # Initial speed of the snake
-        self.default_snake_speed = 0.4
+        self.snake_speed = 0.1 # Initial speed of the snake
+        self.default_snake_speed = 0.1
 
         self.length = 1
         self.x = [40]
@@ -77,7 +77,6 @@ class Snake:
             self.y[0] += SIZE
        
         speed_factor = self.snake_speed
-        print(speed_factor)
         time.sleep(speed_factor)
         self.draw()
 
@@ -116,7 +115,8 @@ class Snake:
         self.y.append(-1)
     def increase_speed(self):
      # Adjust the threshold as needed
-            self.snake_speed -= 0.03
+      if self.snake_speed > 0.001:
+            self.snake_speed -= 0.001
 
 class Game:
     def __init__(self):
