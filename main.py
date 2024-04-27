@@ -5,7 +5,7 @@ import random
 from PIL import Image, ImageDraw
 
 SIZE = 40
-BACKGROUND_COLOR = (110, 110, 5)
+BACKGROUND_COLOR = (226,190,162)
 class Apple:
     def __init__(self, parent_screen):
         self.parent_screen = parent_screen
@@ -121,7 +121,7 @@ class Snake:
 class Game:
     def __init__(self):
         pygame.init()
-        pygame.display.set_caption("Codebasics Snake And Apple Game")
+        pygame.display.set_caption("Snake Xenzia")
 
         pygame.mixer.init()
         self.play_background_music()
@@ -131,6 +131,14 @@ class Game:
         self.snake.draw()
         self.apple = Apple(self.surface)
         self.apple.draw()
+
+        # Load and resize the background image
+        self.background_image = pygame.image.load("resources/download.jpg").convert()
+        self.background_image = pygame.transform.scale(self.background_image, (1000, 800))
+
+    def render_background(self):
+        # Draw the background image
+        self.surface.blit(self.background_image, (0, 0))
 
     def play_background_music(self):
         pygame.mixer.music.load('resources/bg_music_1.mp3')
@@ -154,8 +162,6 @@ class Game:
                 return True
         return False
 
-    def render_background(self):
-         self.surface.fill((255, 255, 255))
 
     def play(self):
         self.render_background()
