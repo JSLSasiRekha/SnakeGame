@@ -41,6 +41,8 @@ class Snake:
         self.parent_screen = parent_screen
         self.image = Image.open("resources/circular_block.png").convert("RGBA")
         self.direction = 'down'
+        self.snake_speed = 0.4  # Initial speed of the snake
+        self.default_snake_speed = 0.4
 
         self.length = 1
         self.x = [40]
@@ -73,7 +75,10 @@ class Snake:
             self.y[0] -= SIZE
         if self.direction == 'down':
             self.y[0] += SIZE
-
+       
+        speed_factor = self.snake_speed
+        print(speed_factor)
+        time.sleep(speed_factor)
         self.draw()
 
     def draw(self):
@@ -109,6 +114,9 @@ class Snake:
         self.length += 1
         self.x.append(-1)
         self.y.append(-1)
+    def increase_speed(self):
+     # Adjust the threshold as needed
+            self.snake_speed -= 0.03
 
 class Game:
     def __init__(self):
@@ -161,6 +169,7 @@ class Game:
             if self.is_collision(self.snake.x[i], self.snake.y[i], self.apple.x, self.apple.y):
                 self.play_sound("ding")
                 self.snake.increase_length()
+                self.snake.increase_speed()
                 self.apple.move()
 
         # snake colliding with itself
@@ -233,3 +242,7 @@ class Game:
 if __name__ == '__main__':
     game = Game()
     game.run()
+
+
+
+    
